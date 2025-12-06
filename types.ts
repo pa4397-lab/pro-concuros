@@ -12,6 +12,7 @@ export interface QuestionWithExplanation extends Question {
 }
 
 export interface ExamConfig {
+    examName?: string; 
     subjects: string[];
     difficulty: 'Fácil' | 'Médio' | 'Difícil';
     questionCount: number;
@@ -32,9 +33,49 @@ export interface ExamResult {
     questions: Question[];
 }
 
-export type AppState = 'HOME' | 'GENERATOR' | 'TAKING_EXAM' | 'RESULTS';
+// Interface for exams saved in Supabase
+export interface SavedExam {
+    id: string;
+    created_at: string;
+    exam_name: string;
+    score: number;
+    total_questions: number;
+    correct_answers: number;
+    subjects: string[];
+}
+
+export type AppState = 'HOME' | 'GENERATOR' | 'TAKING_EXAM' | 'RESULTS' | 'HISTORY';
 
 export interface FreeTierUsage {
     editalUploads: number;
     simuladosCreated: number;
+}
+
+export interface User {
+    id: string;
+    email?: string;
+    name: string;
+    phone?: string;
+    isPro: boolean;
+    isAdmin: boolean;
+    // Gamification fields
+    level: number;
+    currentXp: number;
+    nextLevelXp: number;
+    title: string;
+}
+
+export interface JobRole {
+    name: string;
+    vacancies: number; 
+}
+
+export interface EditalSummary {
+    institution: string; 
+    registrationDates: string;
+    examDate: string;
+    location: string;
+    totalVacancies: string;
+    roles: JobRole[];
+    subjects: string[];
 }
